@@ -1,18 +1,19 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-console.log(galleryItems);
 
 const gallerySmallImg = document.querySelector('.gallery');
 
 const markup = galleryItems.map(({preview, original, description}) =>
 `<li class="gallery__item">
-  <a class="gallery__link" href="${preview}">
+  <a class="gallery__link" href="${original}">
     <img
       class="gallery__image"
       src="${preview}"
-      data-source="${preview}"
+      data-source="${original}"
+      loading="lazy"
       alt="${description}"
+      width= "320px"
     />
   </a>
 </li` ).join('');
@@ -23,7 +24,13 @@ gallerySmallImg.addEventListener('click', onClick);
 
 function onClick (evt) {
   evt.preventDefault();
-  console.log(evt.target);
-  console.log(evt.currentTarget);
+  const bigImg = evt.target.dataset.source;
+  const instance = basicLightbox.create(`<img src="${bigImg}"></img>`)
+
+  instance.show()
 }
+
+
+
+
 
