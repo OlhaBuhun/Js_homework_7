@@ -13,24 +13,33 @@ const markup = galleryItems.map(({preview, original, description}) =>
       data-source="${original}"
       loading="lazy"
       alt="${description}"
-      width= "320px"
+     
     />
   </a>
-</li` ).join('');
+</li>`).join('');
 
 gallerySmallImg.insertAdjacentHTML('beforeend', markup);
 
-gallerySmallImg.addEventListener('click', onClick);
+gallerySmallImg.addEventListener('click', onOpenModal);
 
-function onClick (evt) {
+function onOpenModal (evt) {
   evt.preventDefault();
-  const bigImg = evt.target.dataset.source;
-  const instance = basicLightbox.create(`<img src="${bigImg}"></img>`)
 
-  instance.show()
+  if(!evt.target.classList.contains('gallery__image')){
+    return;
+  } else {
+    const bigImg = evt.target.dataset.source;
+    const instance = basicLightbox.create(`<img src="${bigImg}"></img>`, {
+      onShow: (instance) => {
+        window.addEventListener('keydown', (evt) => {
+          if (evt.code === "Escape") instance.close();
+        })
+      }
+    })
+      instance.show();  
+  }
+  
 }
 
-
-
-
+    
 

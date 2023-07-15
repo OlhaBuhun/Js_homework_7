@@ -13,8 +13,12 @@ const markup = galleryItems.map(({preview, original, description}) =>
 </li>` ).join('');
 
 gallerySmallImg.insertAdjacentHTML('beforeend', markup);
+
 console.log(SimpleLightbox);
+
 new SimpleLightbox('.gallery__item a', {
   captionsData:'alt',
+  captionPosition: 'bottom',
   captionDelay: 250,
+  docClose: 'true'
 });
