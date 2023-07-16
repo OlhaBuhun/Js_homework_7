@@ -34,6 +34,9 @@ function onOpenModal (evt) {
         window.addEventListener('keydown', (evt) => {
           if (evt.code === "Escape") instance.close();
         })
+      },
+      onClose: (instance) => {
+        window.removeEventListener('keydown', (evt) => instance.show())
       }
     })
       instance.show();  
