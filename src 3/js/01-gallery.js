@@ -36,7 +36,7 @@ function onOpenModal (evt) {
         })
       },
       onClose: (instance) => {
-        window.removeEventListener('keydown', (evt) => instance.show())
+        window.removeEventListener('keydown', (evt) => instance.close())
       }
     })
       instance.show();  
